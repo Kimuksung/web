@@ -1,0 +1,72 @@
+.header_title{
+    height:78px;
+    width:100%;
+    min-width:768px;
+    top:0;
+    background:#fff;
+    text-align:center;
+    font-size:16px;
+  }
+  .logo{
+    position: absolute;
+    top:0;
+    left:0;
+    display:block;
+    padding:24px 0 23px 30px;
+}
+.login{
+  position: relative;
+  
+  width:100%;
+  margin-left:235px;
+  margin:0;
+  padding:0;
+  font-size:100%;
+  vertical-align: middle;
+}
+.login_height{
+  height:78px;
+  float:right;
+  margin-right: 10px;
+}
+.bottom_intro{
+  margin-bottom:300px;
+  width:100%;
+  float:right;
+}
+.slide_wrap{
+  height:400px;
+  margin-top:70px;
+
+}
+* {box-sizing: border-box}
+.mySlides {
+    display: none;
+
+}
+img {vertical-align: middle;}
+.slideshow-container {
+    width:100%;
+    position: relative;
+    margin: auto;
+
+}
+.image{
+    height: 400px;
+    width:100%;
+
+}
+.prev{
+    position: absolute;
+    color:red;
+    top:200px;
+    left:100px;
+    z-index:1;
+}
+.next{
+    position: absolute;
+    color:red;
+    top:200px;
+    right:100px;
+    z-index:1;
+}
