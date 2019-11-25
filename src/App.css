@@ -37,16 +37,7 @@
   display:block;
   padding:24px 0 23px 30px;
 }
-.login{
-position: relative;
 
-width:100%;
-margin-left:235px;
-margin:0;
-padding:0;
-font-size:100%;
-vertical-align: middle;
-}
 .login_height{
 height:78px;
 float:right;

@@ -4,10 +4,9 @@ import './App.css';
 import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import React, { Component } from 'react'
 import Images_change from './pages/Images'
-
+import { Toolbar,Button,ButtonGroup,Grid,TextField,Typography  } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
 import Loginform from './pages/Loginform';
-//import Home from './pages/Home';
-//import Banner from './pages/Banner';
 import Board from './pages/Board';
 import NotFound from './pages/Notfound';
 
@@ -16,12 +15,15 @@ class Login extends Component{
   render(){
     return(
       <div className="login">
-      <Link to="/login">
-        <button className="login_height">login</button>
-      </Link>
+        <ButtonGroup>
       <Link to="/board">
-        <button className="login_height">board</button>
+      <Button variant="outlined" color='inherit' style={{color:'#fff', marginRight:'15px'}}>Board</Button>
       </Link>
+      
+      <Link to="/login">
+      <Button variant="outlined" color='inherit' style={{color:'#fff'}}>Login</Button>
+      </Link>
+      </ButtonGroup>
       </div>
     );
   }
@@ -31,12 +33,20 @@ class Subject extends Component {
   render(){
     return (
     <header className="header_title">
-      <h1>
-        <a href="www.google.com" className="logo">
-          <i>space share</i>
-        </a>
-      </h1>
-      <Login></Login>        
+      <Toolbar style={{backgroundColor:'#28282a'}}> <Typography variant="h6" style={{color:'#fff'}}><i>SpaceCloud </i></Typography>
+         <Grid container spacing={1} alignItems="flex-end" style={{color:'#fff' ,marginLeft:'125px'}}>                
+                <Grid item style={{color:'#fff'}}>
+                <TextField id="input-with-icon-grid" label="검색" underline={{style:{color:'#fff'}}} InputLabelProps={{style:{color:'#fff'
+              }}} InputProps={ {style: {color:'#fff' } } } />
+                </Grid>
+            <Grid item>
+                  <SearchIcon />
+                </Grid>
+           </Grid>
+           <Login></Login>   
+         </Toolbar>
+
+           
     </header>
     );
   }
@@ -67,6 +77,7 @@ class App extends Component {
         <Route path="/Board" component={Board} />
         <Route component={NotFound} />
         </Switch>
+ 
       </main>
       
       <footer>
