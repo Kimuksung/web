@@ -1,20 +1,20 @@
 {
-  "name": "test",
+  "name": "backend",
   "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "client": "cd client && yarn start",
-    "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@material-ui/core": "^4.7.1",
-    "@material-ui/icons": "^4.5.1",
-    "body-parser": "^1.18.3",
-    "express": "~4.16.1",
-    "react-slick": "^0.25.2",
-    "slick-carousel": "^1.8.1"
-  },
-  "devDependencies": {
-    "concurrently": "^4.0.1"
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express-session": "^1.17.0",
+    "mongoose": "^5.7.13",
+    "nodemon": "^2.0.1",
+    "pbkdf2-password": "^1.2.1"
   }
 }
