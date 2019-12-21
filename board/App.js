@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios';
 
 class App extends Component{
     componentDidMount() {
@@ -23,8 +24,11 @@ class App extends Component{
       classfication3:false,
       classfication4:false,
       filename:"파일 선택",
-      result_x:0,
-      result_y:0
+      address:"",
+      subject:"",
+      content:"",
+      concreteaddress:"",
+      selectedFile:null
     }
   
   this.handleclassfication1 = this.handleclassfication1.bind(this);
@@ -33,6 +37,11 @@ class App extends Component{
   this.handleclassfication4 = this.handleclassfication4.bind(this);
   this.fileslector = this.fileslector.bind(this);
   this.sample5_execDaumPostcode = this.sample5_execDaumPostcode.bind(this);
+  this.submit=this.submit.bind(this);
+  this.handleSubjectChange = this.handleSubjectChange.bind(this);
+  this.handleContentChange=this.handleContentChange.bind(this);
+  this.handleConcreteaddressChange=this.handleConcreteaddressChange.bind(this);
+
   }
 
   handleclassfication1(){
@@ -50,6 +59,7 @@ class App extends Component{
   fileslector(event){
     if(window.FileReader){
       this.setState({filename:event.target.files[0].name});
+      this.setState({selectedFile:event.target.files[0]});
     }else{
       console.log('test2');
     }
@@ -66,20 +76,16 @@ class App extends Component{
       position: new window.daum.maps.LatLng(37.537187, 127.005476),
       map: daumMap
   });
-    new window.daum.Postcode({
-      
+    new window.daum.Postcode({     
       oncomplete:function(data){
-        console.log("test2");
         var addr=data.address;
         document.getElementById("sample5_address").value=addr;
-        console.log(addr);
+        //console.log(addr);
 
         geocoder.addressSearch(data.address,function(results,status){
           if(status===window.daum.maps.services.Status.OK){
             var result = results[0];
             var coords = new window.daum.maps.LatLng(result.y,result.x);
-            console.log("강남:"+result.y);
-            console.log("강남:"+result.x);
             el.style.display="block";
             daumMap.relayout();
             daumMap.setCenter(coords);
@@ -88,9 +94,60 @@ class App extends Component{
         })
       }
     }).open();
-
   }
-  
+  submit(e){
+    //console.log(document.getElementById("sample5_address").value);
+    //console.log(document.getElementById("ex_filename").files);
+    console.log("제목:"+this.state.subject);
+    console.log("내용:"+this.state.content);
+    console.log("주소:"+this.state.address);
+    console.log("상세주소:"+this.state.concreteaddress);
+    console.log("category1:"+this.state.classfication1);
+    console.log("category2:"+this.state.classfication2);
+    console.log("category3:"+this.state.classfication3);
+    console.log("category4:"+this.state.classfication4);
+    console.log("selectedFile:"+this.state.selectedFile);
+    console.log("filename:"+this.state.filename);
+
+    const formData= new FormData();
+    formData.append('img',this.state.selectedFile);
+    formData.append('address',this.state.address+"/"+this.state.concreteaddress);
+    formData.append('category1',this.state.classfication1);
+    formData.append('category2',this.state.classfication2);
+    formData.append('category3',this.state.classfication3);
+    formData.append('category4',this.state.classfication4);
+    formData.append('subject',this.state.subject);
+    formData.append('content',this.state.content);
+    //console.log("form address:"+formData.get('address'))
+    return axios.post("http://localhost:5000/boards/upload",formData,{
+      headers:{
+        'Content-Type':'multipart/form-data'
+      }
+    }).then(res=>{  
+      alert('성공')
+    }).catch(err=>{
+      alert(err)
+    })
+  }
+
+  handleSubjectChange(e){
+    this.setState({
+      subject:e.target.value
+    })
+  }
+
+  handleContentChange(e){
+    this.setState({
+      content:e.target.value
+    })
+  }
+  handleConcreteaddressChange(e){
+    this.setState({
+      concreteaddress:e.target.value,
+      address:document.getElementById("sample5_address").value
+    })
+  }
+
   render(){
     let bgColor1 = this.state.classfication1?"purple":"white"
     let bgColor2 = this.state.classfication2?"purple":"white"
@@ -120,7 +177,18 @@ class App extends Component{
 
                 </div>
                 <div className="lineup2">
-                <input type="text" name="subject" onChange={null} style={{width:"100%"}}/><br/>
+                <input type="text" name="subject" onChange={this.handleSubjectChange} style={{width:"100%"}}/><br/>
+                </div>
+
+                <div className="font_bold">
+                  상세 내용(내용)
+                <span className="font_plus">
+                  30자
+                </span>
+
+                </div>
+                <div className="lineup2">
+                <input type="text" name="subject" onChange={this.handleContentChange} style={{width:"100%"}}/><br/>
                 </div>
 
                 <div className="font_bold">
@@ -143,16 +211,16 @@ class App extends Component{
                 </div>
 
                 <div>
-                <input type="text" id="sample5_address" placeholder="주소" style={{float:"left",width:"70%"}}/>
+                <input type="text" id="sample5_address" style={{float:"left",width:"70%"}} />
                 <input type="button" onClick={this.sample5_execDaumPostcode} value="주소 검색" style={{float:"left",marginLeft:"20px"}}/><br/>
                 <div id="map" style={{width:"300px",height:"300px",marginTop:"10px",display:"none"}}></div>
-                <input type="text" id="correctaddress" placeholder="상세 주소" style={{float:"left",width:"70%"}}/>
+                <input type="text" id="correctaddress" placeholder="상세 주소" onChange={this.handleConcreteaddressChange}style={{float:"left",width:"70%"}}/>
                 </div>
 
                 </div>
                     <div className="select_margin">
                       <a href="/"><input type="button" className="prev_button" value="취소" style={{marginTop:"20px"}}></input></a>
-                      <input type="button" className="next_button" value="등록" style={{marginTop:"20px"}}></input>
+                      <input type="button" className="next_button" value="등록" onClick={this.submit} style={{marginTop:"20px"}}></input>
                       
                     </div>
             </div>
