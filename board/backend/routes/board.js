@@ -20,13 +20,26 @@ const upload = multer({
     }),
   });
 
-router.get(('/'),(req,res)=>{
-    return res.json({ success:"okay"})
+router.get(('/list'),cors(corsOptions),function(req,res){
+    Board.find(function(err,board){
+        if(err) return res.status(500).send({error:'db failed'});
+        res.json(board);
+        console.log(board);
+    })
+    /*Board.find({no:{$in:[1,2,3]}},function(err,array){
+        console.log(array);
+        res.render('index',{data:array});
+    })*/
 });
 
-router.post('/up', upload.single('img'), (req, res) => {
-    console.log(req.files);
-    console.log(req.body.category1=='true');
+router.get(('/dataselect/:no'),cors(corsOptions),function(req,res){
+    console.log(req.params.no);
+    Board.findOne({no:req.params.no},function(err,board){
+        if(err) return res.status(500).json({error:err});
+        if(!board) return res.status(404).json({error: 'user1 not found'});
+        console.log(board);
+        res.json(board);
+    })
 });
 
 router.post('/upload',cors(corsOptions),upload.single('img'),(req,res,next)=>{
@@ -56,22 +69,5 @@ router.post('/upload',cors(corsOptions),upload.single('img'),(req,res,next)=>{
         })).catch((err)=>next(err));
     });
 });
-
-//router.route("/upload").post(upload.single('image'),(req,res,next)=>{
-  //console.log(req.file);
-  /*const newBoard=new Board({
-      imageName:req.body.imageName,
-      imageData:req.file.path
-  });
-  newBoard.save()
-    .then((result)=>{
-        console.log(result);
-        res.status(200).json({
-            success:true,
-            document:result
-        });
-    }).catch((err)=>next(err));  
-})*/
-//})
 
 module.exports = router;

@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const port = process.env.PORT || 5000;
+app.use('/uploads',express.static('uploads'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.json());
