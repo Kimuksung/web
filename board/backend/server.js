@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser=require('body-parser');
 const app = express();
 //var session = require('express-session');
-
+const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
@@ -13,6 +13,7 @@ app.use('/uploads',express.static('uploads'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors());
 /*
 app.use(session({
   secret: '1234DSFs@adf1234!@#$asd',

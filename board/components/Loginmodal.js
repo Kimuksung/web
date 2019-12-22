@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   
     return (
       <div className={classes.root}>
-        <Button><a href="/login"> 로그인이 필요합니다. </a></Button>
+        <Button><a href="/login"style={{textDecoration:"none"}}> 로그인이 필요합니다. </a></Button>
       </div>
     );
   }

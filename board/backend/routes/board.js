@@ -6,8 +6,12 @@ var cors=require('cors');
 
 var corsOptions={
   origin:'http://localhost:3000',
-  optionSuccessStatus:200
+  optionSuccessStatus:200,
 }
+var corsOptions2={
+    origin:'http://localhost:3000',
+    optionSuccessStatus:404,
+  }
 
 const upload = multer({
     storage: multer.diskStorage({
@@ -68,6 +72,17 @@ router.post('/upload',cors(corsOptions),upload.single('img'),(req,res,next)=>{
             })
         })).catch((err)=>next(err));
     });
+});
+
+router.delete(('/delete/:num'),function(req,res){
+    console.log(req.params.num);
+    Board.deleteOne({no:req.params.num},function(err){
+        if(err){
+            if(err) return res.status(500).json({error:err});
+        }
+        res.json({success:"true"});
+    })
+
 });
 
 module.exports = router;

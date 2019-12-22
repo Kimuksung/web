@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './board.css';
 import axios from 'axios';
-
+import Subject from './Subject';
 class Board extends Component{
 
     componentDidMount() {
@@ -112,9 +112,11 @@ class Board extends Component{
             'Content-Type':'multipart/form-data'
           }
         }).then(res=>{  
-          alert('성공')
+          alert('게시판 등록에 성공하였습니다.');
+          window.location = '/';
         }).catch(err=>{
-          alert(err)
+          alert('게시판 등록에 실패하였습니다.');
+          window.location = '/';
         })
       }
     
@@ -142,7 +144,10 @@ class Board extends Component{
         let bgColor3 = this.state.classfication3?"purple":"white"
         let bgColor4 = this.state.classfication4?"purple":"white"
         return(
+            <div>
+              <Subject></Subject>
             <div className="border_body">
+              
             <div className="border_main">
                 <div className="lineup">
                 <div className="font_bold">모임장소(카테고리)<span className="font_plus">최대 4개 선택가능</span></div>
@@ -199,7 +204,7 @@ class Board extends Component{
                 <div>
                 <input type="text" id="sample5_address" style={{float:"left",width:"70%"}} />
                 <input type="button" onClick={this.sample5_execDaumPostcode} value="주소 검색" style={{float:"left",marginLeft:"20px"}}/><br/>
-                <div id="map" style={{width:"300px",height:"300px",marginTop:"10px",display:"none"}}></div>
+                <div id="map" style={{width:"100%",height:"400px",marginTop:"10px",display:"none"}}></div>
                 <input type="text" id="correctaddress" placeholder="상세 주소" onChange={this.handleConcreteaddressChange}style={{float:"left",width:"70%"}}/>
                 </div>
 
@@ -211,6 +216,7 @@ class Board extends Component{
                     </div>
             </div>
             </div>
+          </div>
         );
     }
 }

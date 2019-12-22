@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Loginmodal from './components/Loginmodal'
+import Loginmodal from './components/Loginmodal';
 import Images_change from './components/Images';
+import Subject from './components/Subject';
 import axios from 'axios';
 
 class App extends Component{
@@ -23,9 +24,8 @@ class App extends Component{
   render(){
     return(
       <div>
-      <a href="/board">
-        <input type="button" value="board 게시판"></input>
-      </a>
+        <Subject></Subject>
+
       <Images_change/>
 
           <div style={{float:"center",margin:"50px"}}>
@@ -38,7 +38,7 @@ class App extends Component{
                 </tr>            
           {
             this.state.data.map((item)=>{
-              return <tr key={item.no}> <td>{item.no}</td> <td><a href={"/board/"+item.no+"/view"}>{item.subject}</a></td> <td>{item.address}</td> </tr> 
+              return <tr key={item.no}> <td>{item.no}</td> <td><a style={{textDecoration:"none"}}href={"/board/"+item.no+"/view"}>{item.subject}</a></td> <td>{item.address}</td> </tr> 
             })
           }
           </tbody>   

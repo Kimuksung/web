@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import { Slide } from 'react-slideshow-image';
-import space1 from '../images/space1.jpg';
-import space2 from '../images/space2.jpg';
-import space3 from '../images/space3.jpg';
 import './Images.css';
 import Slider from "react-slick";
-import Imgmediacard from './Imgmediacard';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
@@ -58,16 +54,14 @@ class Images_change extends Component{
             <div className="slide-container">
             <Slide {...properties}>
               <div className="each-slide">
-                <div style={{'backgroundImage': `url(${space1})`}}>
-                </div>
+                <img src="//localhost:5000/uploads/1.jpg"/>
+                
               </div>
               <div className="each-slide">
-                <div style={{'backgroundImage': `url(${space2})`}}>
-                </div>
+              <img src="//localhost:5000/uploads/2.jpg"/>
               </div>
               <div className="each-slide">
-                <div style={{'backgroundImage': `url(${space3})`}}>
-                </div>
+              <img src="//localhost:5000/uploads/3.jpg"/>
               </div>
             </Slide>
 

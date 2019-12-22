@@ -1,17 +1,18 @@
 .slide-container {
     width: 100%;
-
     margin: auto; }
   
   h3 {
     text-align: center; }
   
-  .each-slide > div {
+  .each-slide > img {
     display: flex;
     align-items: center;
     justify-content: center;
     background-size: cover;
     height: 500px;
+    margin:auto;
+    width:100%;
   }
   
   .each-slide span {

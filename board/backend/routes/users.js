@@ -4,6 +4,12 @@ const router = require('express').Router();
 let User = require('../models/user.model');
 var bkfd2Password = require("pbkdf2-password");
 var hasher = bkfd2Password();
+var cors=require('cors');
+
+var corsOptions={
+  origin:'http://localhost:3000',
+  optionSuccessStatus:200
+}
 
 router.route('/').get((req, res) => {
     if(req.cookies){
@@ -15,12 +21,32 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));*/
 });
 
-router.route('/login').get((req,res)=>{
-    var id = req.params.id;
-    var pw = req.params.pw;
-    console.log("id:"+id);
-    console.log("id:"+pw);
-    return res.json({id:id,pw:pw});
+router.post('/login',cors(corsOptions),function(req,res){
+    var pw = req.body.pw;
+    var id = req.body.id;
+    console.log(req.body);
+    User.findOne({id: req.body.id},function(err,user){
+        if(!user){
+            console.log("user없을떄");
+            return res.status(408).json({
+                error: "no id"
+            });
+        }else{
+            console.log("user있을떄");
+            hasher({password:pw,salt:user.salt}, function(err, pass, salt, hash){
+                if(hash===user.pw){  
+                    console.log("로그인 성공")
+                    return res.json({success:"true"});
+                }else{
+                    console.log("인증 실패");
+                    return res.status(409).json({
+                        error: "no login1"
+                    });
+                }
+            });
+        }
+    })
+})
     /*let content;
     if(req.session.userName){
         content = `<h1>${req.session.userName} 안녕하세요.</h1>`;
@@ -29,8 +55,8 @@ router.route('/login').get((req,res)=>{
         content = `<h1>sex</h1>`;
     }
     res.send(content);*/
-})
 
+/*
 router.route('/login').post((req,res)=>{
     var id = req.body.id;
     var pw = req.body.pw;
@@ -57,7 +83,7 @@ router.route('/login').post((req,res)=>{
             });
         }
     })
-});
+});*/
 
 router.route('/:id').get((req,res)=>{
     User.findOne({id: req.params.id},function(err,user){

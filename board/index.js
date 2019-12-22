@@ -6,6 +6,9 @@ import './index.css';
 import App from './App';
 import Board from './components/Board';
 import BoardView from './components/BoardView';
+import Login from './components/Login';
+import Sign from './components/Sign'
+import LoginSuccess from './components/LoginSuccess'
 import * as serviceWorker from './serviceWorker';
 
 
@@ -15,6 +18,9 @@ ReactDOM.render(
         <Route path="/" component={App}/>
         <Route path="/board" component={Board}/>
         <Route path="/board/:no(\d|)/view" component={BoardView}/>
+        <Route path="/login" component={Login}/>
+        <Route path="/sign" component={Sign}/>
+        <Route path="/login/:id" component={LoginSuccess}/>
     </Router>,document.getElementById('root')
 );
 
