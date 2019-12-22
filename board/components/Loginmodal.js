@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: `yellow`,
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
+      padding: theme.spacing(3, 3, 3),
     },
     button1:{
       display:`flex`
@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme => ({
     };
   
     return (
-      <div>
+      <div >
         <button type="button" onClick={handleOpen}>
           <AssignmentIndIcon></AssignmentIndIcon>
         </button>
@@ -88,7 +88,7 @@ const useStyles = makeStyles(theme => ({
             <div className={classes.button1}>
             <IconButton ><AssignmentIndIcon></AssignmentIndIcon></IconButton>          
             <TextButtons ></TextButtons>
-            <IconButton className={classes.button2} onClick={handleClose} ><ExitToAppIcon></ExitToAppIcon></IconButton>
+            <IconButton className={classes.button2} onClick={handleClose} ><ExitToAppIcon style={{float:"right"}}></ExitToAppIcon></IconButton>
             </div>
           </div>
         </Modal>

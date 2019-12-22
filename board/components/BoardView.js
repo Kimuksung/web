@@ -70,6 +70,7 @@ class BoardView extends Component{
             </header>
             <div style={{marginLeft:"25%",marginRight:"25%"}}>
                 <h1 style={{float:"left",width:"100%"}}>{this.state.data.subject}</h1>
+                <hr style={{width:"200px",color:"yellow",border:"solid",float:"left",marginTop:"-20px"}}></hr>
                 
                 <img src={"//localhost:5000/"+this.state.data.imageData} style={{float:"left",width:"100%",marginTop:"20px"}}/>
                 <h5 style={{float:"left",width:"100%"}}> 공간 소개 </h5>

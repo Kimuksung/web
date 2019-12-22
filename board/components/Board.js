@@ -146,7 +146,8 @@ class Board extends Component{
         return(
             <div>
               <Subject></Subject>
-            <div className="border_body">
+              <h1 style={{textAlign:"center"}}> 공간 등록 </h1>
+            <div className="border_body" style={{marginTop:"-1%"}}>
               
             <div className="border_main">
                 <div className="lineup">
@@ -154,10 +155,10 @@ class Board extends Component{
             </div>
 
                 <div className="lineup2">
-                    <input type="button" id="select_button1" onClick={this.handleclassfication1} value="회의실" style={{backgroundColor:bgColor1,border:'1px solid gray',borderCollapse:'collapse'}}></input>
-                    <input type="button" id="select_button2" onClick={this.handleclassfication2} value="파티룸" style={{backgroundColor:bgColor2,border:'1px solid gray',borderCollapse:'collapse'}}></input>
-                    <input type="button" id="select_button3" onClick={this.handleclassfication3} value="카페" style={{backgroundColor:bgColor3,border:'1px solid gray',borderCollapse:'collapse'}}></input>
-                    <input type="button" id="select_button4" onClick={this.handleclassfication4} value="엠티장소" style={{backgroundColor:bgColor4,border:'1px solid gray',borderCollapse:'collapse'}}></input>
+                    <input type="button" id="select_button1" onClick={this.handleclassfication1} value="회의실" style={{backgroundColor:bgColor1,border:'1px solid gray',borderCollapse:'collapse',display:"table"}}></input>
+                    <input type="button" id="select_button2" onClick={this.handleclassfication2} value="파티룸" style={{backgroundColor:bgColor2,border:'1px solid gray',borderCollapse:'collapse',display:"table"}}></input>
+                    <input type="button" id="select_button3" onClick={this.handleclassfication3} value="카페" style={{backgroundColor:bgColor3,border:'1px solid gray',borderCollapse:'collapse',display:"table"}}></input>
+                    <input type="button" id="select_button4" onClick={this.handleclassfication4} value="엠티장소" style={{backgroundColor:bgColor4,border:'1px solid gray',borderCollapse:'collapse',display:"table"}}></input>
                 </div>
                 
                 <div className="font_bold">
@@ -189,9 +190,9 @@ class Board extends Component{
                 </span>
                 </div>
                 <div className="filebox">
-                <input className="upload-name" value={this.state.filename} disabled="disabled" style={{width:"50%",float:"left"}} />
-                <label htmlFor="ex_filename">업로드</label>
-                <input type="file" id="ex_filename" className="upload-hidden" multiple accept="image/*" onChange={this.fileslector}
+                <input className="upload-name" value={this.state.filename} disabled="disabled" style={{width:"80%",float:"left"}} />
+                <label style={{marginLeft:"-10%"}} htmlFor="ex_filename">업로드</label>
+                <input type="file" id="ex_filename" className="upload-hidden" multiple accept="image/*" onChange={this.fileslector} 
                 />
 
                 <div className="font_bold">
@@ -202,10 +203,10 @@ class Board extends Component{
                 </div>
 
                 <div>
-                <input type="text" id="sample5_address" style={{float:"left",width:"70%"}} />
+                <input type="text" id="sample5_address" style={{float:"left",width:"90%"}} />
                 <input type="button" onClick={this.sample5_execDaumPostcode} value="주소 검색" style={{float:"left",marginLeft:"20px"}}/><br/>
                 <div id="map" style={{width:"100%",height:"400px",marginTop:"10px",display:"none"}}></div>
-                <input type="text" id="correctaddress" placeholder="상세 주소" onChange={this.handleConcreteaddressChange}style={{float:"left",width:"70%"}}/>
+                <input type="text" id="correctaddress" placeholder="상세 주소" onChange={this.handleConcreteaddressChange}style={{float:"left",width:"90%"}}/>
                 </div>
 
                 </div>
